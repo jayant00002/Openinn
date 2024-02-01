@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/tasks', authenticateToken,  async (req, res) => {
   const { title, description, due_date } = req.body;
   try {
-    console.log(req.body.user)
+    //console.log(req.body.user)
     const task = await Task.create({
       title,
       description,

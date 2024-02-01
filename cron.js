@@ -1,7 +1,7 @@
 require('dotenv').config();
 const cron = require('node-cron');
 const Twilio = require('twilio');
-const { Task, User } = require('./models'); // Assuming these are your Sequelize models
+const { Task, User } = require('./models'); 
 
 const twilioClient = new Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
@@ -48,7 +48,7 @@ const makeCall = async (user) => {
   
       console.log(`Call initiated to user ${user.id}: ${call.sid}`);
   
-      // Placeholder for logic to determine if the call was attended, based on your app's logic
+      // Placeholder for logic to determine if the call was attended, based on app's logic
       // This could involve listening for a webhook event on '/call-status'
       return false; // Return true if call was attended, false otherwise
     } catch (error) {
@@ -66,7 +66,7 @@ const makeCall = async (user) => {
       },
       include: [{
         model: User,
-        where: { deleted_at: null }, // Assuming soft deletion
+        where: { deleted_at: null }, // Exclude soft-deleted users
       }],
       order: [[User, 'priority', 'ASC']], // Order by user priority
     });
